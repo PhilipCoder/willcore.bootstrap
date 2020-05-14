@@ -1,0 +1,6 @@
+Custom components:
+* Carousel
+
+Assignables:
+* Collapse
+* Dropdown
