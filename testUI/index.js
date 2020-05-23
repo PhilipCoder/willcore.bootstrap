@@ -22,7 +22,7 @@ const view = (model, ui) => {
         await ui.myAlert;
     };
     model.$showToast.onclick.event = async () => {
-        ui.bootstrapToast = ["Message", "Hello world!", {style:"info",delay:4000}];
+        ui.bootstrapToast = ["Message", "Hello world!", {style:"default",delay:6000}];
     };
 };
 

@@ -293,3 +293,131 @@ const view = (model) => {
 
 export { view };
 ```
+
+### 6) Alerts
+
+Alerts are modals that can prompt the user with message and resolve a promise when the user clicks on the "OK" button. Alerts are assignables on the UI proxy and not on the model of a view or elements. The UI proxy is the second parameter of the view function.
+
+_An alert assignable needs the following assignments to complete assignment:_
+
+Type | Description
+------------ | -------------
+name | The name of the alert. This is used to return the promise used to resolve the modal close event.
+bootstrapAlert (assignable) | A wrapper assignable for the $().modal({}) function. 
+string | The heading of the alert modal.
+string | The message of the alert modal.
+
+Result: Promise.
+
+```javascript
+const view = (model, ui) => {
+  ui.myAlert.bootstrapAlert = "Message";
+  ui.myAlert = "Hello world!";
+  await ui.myAlert;
+  console.log("The user closed the alert.");
+};
+
+export { view };
+```
+
+#### Alert:
+
+![Alert Image](/res/alert.PNG)
+
+### 7) Prompt
+
+Prompts are modals that can prompt the user with message, give an user options and resolve a promise when the user clicks on the buttons. Prompts are assignables on the UI proxy and not on the model of a view or elements. The UI proxy is the second parameter of the view function.
+
+_A prompt assignable needs the following assignments to complete assignment:_
+
+Type | Description
+------------ | -------------
+name | The name of the alert. This is used to return the promise used to resolve the modal close event.
+bootstrapPrompt (assignable) | A wrapper assignable for the $().modal({}) function. 
+string | The heading of the prompt modal.
+string | The message of the prompt modal.
+object | The buttons of the modal.
+
+Result: Promise.
+
+The buttons object is an object where the keys are the names of the buttons and the value is an object with the label of the button and a field indicating if the button is a primary button. For example:
+
+```javascript
+{ yes: { label: "Yes", primary: true }, no: { label: "No", primary: false } }
+```
+
+#### Example:
+
+```javascript
+const view = (model, ui) => {
+  ui.myPrompt.bootstrapPrompt = "Message";
+  ui.myPrompt = "Hello world!";
+  ui.myPrompt = { yes: { label: "Yes", primary: true }, no: { label: "No", primary: false } };
+  let result = await ui.myPrompt;
+  console.log(`You selected ${result}`);
+};
+
+export { view };
+```
+
+#### Alert:
+
+![Alert Image](/res/prompt.PNG)
+
+### 8) Toasts
+
+Toasts are temporary modals that self destruct after showing user a message. Toasts are assignables on the UI proxy and not on the model of a view or elements. The UI proxy is the second parameter of the view function.
+
+_A toast assignable needs the following assignments to complete assignment:_
+
+Type | Description
+------------ | -------------
+bootstrapToast (assignable) | A wrapper assignable for the $().toast({}) function. 
+string | The heading of the toast.
+string | The message of the toast.
+settings | The settings of the toast.
+
+Result: None.
+
+The settings object is an object that have 2 option properties: delay and style:
+
+* Delay is the duration in milliseconds the toast will be visible to the user. The default value is 5000.
+* Style is header background style that will be applied to the toast. Valid values are: "info", "success", "warning", "danger" and "default"
+
+For example:
+
+```javascript
+{style:"info",delay:4000}
+```
+
+#### Example:
+
+```javascript
+const view = (model, ui) => {
+  ui.bootstrapToast = ["Message", "Hello world!", {style:"info",delay:4000}];
+};
+
+export { view };
+```
+
+### Styles
+
+#### Info
+
+![Alert Image](/res/toastInfo.PNG)
+
+#### Success
+
+![Alert Image](/res/toastSuccess.PNG)
+
+#### Warning
+
+![Alert Image](/res/toastWarning.PNG)
+
+#### Danger
+
+![Alert Image](/res/toastDanger.PNG)
+
+#### Default
+
+![Alert Image](/res/toastDefault.PNG)
