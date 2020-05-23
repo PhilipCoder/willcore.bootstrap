@@ -27,6 +27,10 @@ class bootstrapAssignable extends assignable {
         this.parentProxy._assignable.addClientAssignable("bootstrapDropdown",`/${this.propertyName}/dropdown.js`);
         this.parentProxy._assignable.addClientAssignable("bootstrapPopover",`/${this.propertyName}/popover.js`);
         this.parentProxy._assignable.addClientAssignable("bootstrapTooltip",`/${this.propertyName}/tooltip.js`);
+        this.parentProxy._assignable.addClientAssignable("bootstrapAlert",`/${this.propertyName}/alert.js`);
+        this.parentProxy._assignable.addClientAssignable("bootstrapPrompt",`/${this.propertyName}/prompt.js`);
+        this.parentProxy._assignable.addClientAssignable("bootstrapToast",`/${this.propertyName}/toast.js`);
+
     }
 
     getFilesFolderPath(serverProxy) {
