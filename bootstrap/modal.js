@@ -2,6 +2,8 @@ import { assignable } from "/willcore/assignable/assignable.js"
 import { view } from "/uiModules/logic/view.js";
 import { guid } from "/uiModules/helpers/guid.js";
 import { elementProxy } from "/uiModules/proxies/elementProxy/elementProxy.js";
+import { baseRequestProxy } from "/uiModules/proxies/requestProxy/baseRequestProxy.js";
+import { willcoreUIInstance } from "/uiModules/assignables/uiAssignable.js";
 
 class component extends assignable {
     constructor() {
@@ -27,16 +29,16 @@ class component extends assignable {
                         $("#" + this.id).modal('toggle');
                         resolve(data);
                     };
-                   
+
                     this.modalModel._target.close = closeModal;
-                    await this.modalFunction(this.modalModel);
+                    await this.modalFunction(this.modalModel, willcoreUIInstance, baseRequestProxy.new());
                 });
             }
         }
     }
 
     async completed() {
-      
+
     }
 
     async initView(modelValues) {
@@ -48,9 +50,9 @@ class component extends assignable {
         this.element.innerHTML = modalDiv.innerHTML;
         this.modalModel = viewInstance.viewModel;
         this.modalFunction = viewInstance.viewFunction;
-        if (typeof modelValues === "object" && modelValues !== null){
-            for (let key in modelValues){
-                if (typeof modelValues[key] === "object" && modelValues[key] !== null){
+        if (typeof modelValues === "object" && modelValues !== null) {
+            for (let key in modelValues) {
+                if (typeof modelValues[key] === "object" && modelValues[key] !== null) {
                     this.modalModel[key] = modelValues[key];
                 }
             }
