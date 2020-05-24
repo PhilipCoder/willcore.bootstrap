@@ -158,6 +158,11 @@ Result: { show: function }.
 
 After assigning, an object will be available containing one function, "show" that can be used to activate and show the modal. This function will return a promise that will resolve into the result of the modal. The view function of the modal will have a member function called "close" that can be used to resolve the promise and close the modal. The parameter of the close function will be result of the promise.
 
+Name | Type | Description
+------------ | ------------- | ------------ |
+modalProperties | Object | The bootstrap options object passed to the $().modal() function.
+modelValues | Values | Values that will be passed to the model of the modal. Object's properties will be assigned to the model as data collections.
+
 __Example__
 
 ```html
@@ -188,7 +193,7 @@ __Example__
 const view = (model) => {
     model.$saveChanges.onclick.event = () => {
         //Close the modal and send result back
-        model.close({ message: "result saved" });
+        model.close({ message: "result saved"+model.data.message  });
     };
 };
 
@@ -200,7 +205,7 @@ export { view };
 const view = (model) => {
     model.$modalContainer.testModal.bootstrapModal = "/modals/about";
     model.$showModal.onclick.event =async () =>{  
-        let result = await model.$modalContainer.testModal.show();
+        let result = await model.$modalContainer.testModal.show({},{data:{message:"awesome"});
         console.log(result);
     };
 };

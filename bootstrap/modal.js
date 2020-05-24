@@ -19,13 +19,15 @@ class component extends assignable {
     completionResult() {
         return {
             _noIntermediateProxy: true,
-            show: (options) => {
+            show: async (options, modelValues) => {
+                await this.initView(modelValues);
                 $("#" + this.id).modal(options);
                 return new Promise(async (resolve, reject) => {
                     let closeModal = (data) => {
                         $("#" + this.id).modal('toggle');
                         resolve(data);
                     };
+                   
                     this.modalModel._target.close = closeModal;
                     await this.modalFunction(this.modalModel);
                 });
@@ -34,6 +36,10 @@ class component extends assignable {
     }
 
     async completed() {
+      
+    }
+
+    async initView(modelValues) {
         let viewInstance = new view(this.bindedValues.string[0]);
         await viewInstance.init();
         let modalDiv = document.createElement("div");
@@ -42,6 +48,13 @@ class component extends assignable {
         this.element.innerHTML = modalDiv.innerHTML;
         this.modalModel = viewInstance.viewModel;
         this.modalFunction = viewInstance.viewFunction;
+        if (typeof modelValues === "object" && modelValues !== null){
+            for (let key in modelValues){
+                if (typeof modelValues[key] === "object" && modelValues[key] !== null){
+                    this.modalModel[key] = modelValues[key];
+                }
+            }
+        }
     }
 }
 

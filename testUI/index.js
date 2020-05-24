@@ -1,7 +1,7 @@
 const view = (model, ui) => {
     model.$modalContainer.testModal.bootstrapModal = "/views/modal";
     model.$showModal.onclick.event = async () => {
-        let result = await model.$modalContainer.testModal.show();
+        let result = await model.$modalContainer.testModal.show({},{data:{message:"awesome"}});
         console.log(result);
     };
     model.$showModal.bootstrapTooltip = { title: "Click to open modal" };
