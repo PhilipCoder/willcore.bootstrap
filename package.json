@@ -1,6 +1,6 @@
 {
     "name": "willcore.bootstrap",
-    "version": "1.0.0",
+    "version": "1.0.2",
     "description": "WillCore.Bootstrap contains Bootstrap 4.5 files and assignables. The assignables are wrappers that translate the Bootstrap's JQuery API to WillCore.UI assignables.",
     "main": "moduleContainer/willCoreModules.js",
     "_moduleAliases": {
@@ -28,7 +28,7 @@
         "/moduleContainer"
     ],
     "dependencies": {
-        "willcore.ui": "^1.1.0"
+        "willcore.ui": "^1.1.1"
     },
     "devDependencies": {
         "mocha": "^7.1.2",
