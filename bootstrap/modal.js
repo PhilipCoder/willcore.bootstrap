@@ -31,7 +31,7 @@ class component extends assignable {
                     };
 
                     this.modalModel._target.close = closeModal;
-                    await this.modalFunction(this.modalModel, willcoreUIInstance, baseRequestProxy.new());
+                    await this.viewInstance.executeViewFunction(this.modalFunction);
                 });
             }
         }
@@ -43,11 +43,13 @@ class component extends assignable {
 
     async initView(modelValues) {
         let viewInstance = new view(this.bindedValues.string[0]);
+        this.viewInstance = viewInstance;
         await viewInstance.init();
         let modalDiv = document.createElement("div");
         modalDiv.innerHTML = viewInstance.html;
         modalDiv.childNodes[0].id = this.id;
         this.element.innerHTML = modalDiv.innerHTML;
+        this.element.appendChild(viewInstance.createViewIndicator());
         this.modalModel = viewInstance.viewModel;
         this.modalFunction = viewInstance.viewFunction;
         if (typeof modelValues === "object" && modelValues !== null) {

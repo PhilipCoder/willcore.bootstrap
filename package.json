@@ -28,7 +28,7 @@
         "/moduleContainer"
     ],
     "dependencies": {
-        "willcore.ui": "^1.1.6"
+        "willcore.ui": "^1.1.7"
     },
     "devDependencies": {
         "mocha": "^7.1.2",
